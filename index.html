@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US" ng-app="myApp">
+
+
+    <head>
+     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+       <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+      <!-- AngularJS -->
+         <script src="js/lib/angular.min.js"></script>
+
+        <!-- App -->
+          <script src="js/controllers/myCtr.js"></script>
+           <script src="js/services/movies.js"></script>
+            <script src="js/app.js"></script>
+
+    </head>
+         <style>
+                 
+                body{     background: #949494 }
+                   h1 {
+                      font-family:  courier;
+                        font-size: 37px;
+                        color:  #443C91;
+                        margin-bottom: 0px;
+                         margin-top: 40px;
+                          text-align: center; 
+                          text-shadow: 1px 1px 2px #082b34; 
+                    }
+
+            
+         </style>
+
+               
+    <body>
+        <div class="container">
+            </br>
+            <div data-ng-controller="myCtr" ng-init="showData()">
+                <form class="form-inline">
+                    <div class="row">
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"> </div>
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <div class="form-group">
+                                <label for="exampleInputsearch"><h1><strong>Looking For:</strong></h1></label>
+                                <input type="text" data-ng-model="searching" class="form-control" id="exampleInputsearch" placeholder="which Movie"> </div>
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"> </div>
+                    </div>
+                    </br>
+                    <div class="row">
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"> </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <div class="checkbox">
+                            
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                </br>
+             
+                <div ng-repeat="x in movies | filter:searching | filter:search.type1 | filter:search.type2 | filter:search.type3 | filter:search.type4 | orderBy:sortBy| limitTo: paginationLimit() ">
+                    <div class="row">
+                        <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">{{x.Title}}</h3> </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-5 col-lg-5 "> <img src="{{x.Poster}}"/> </div>
+                                        </BR>
+                                        </BR>
+                                        </BR>
+                                        <div class=" col-md-6 col-lg-6 ">
+                                            <table class="table table-user-information">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Year:</td>
+                                                        <td>{{x.Year}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Run time:</td>
+                                                        <td>{{x.Runtime}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>IMDB</td>
+                                                        <td>{{x.imdbRating}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <tr>
+                                                            <td>Description</td>
+                                                            <td>{{x.Plot}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Genre</td>
+                                                            <td>{{x.Genre}}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Awards</td>
+                                                            <td>{{x.Awards}}</td>
+                                                        </tr>
+                                                        <td>Country</td>
+                                                        <td>{{x.Country}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+    <div class="row">
+         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"> </div>
+         
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 col-lg-offset-2"> 
+        
+            <button type="button" class="btn btn-secondary" ng-show="hasMoreItemsToShow()" ng-click="showMoreItems()">Load More</button>
+            
+    </div>
+        </div>
+    </br>
+
+
+        </div>
+    </body>
+
+</html>
